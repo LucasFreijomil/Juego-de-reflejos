@@ -13,4 +13,4 @@ Debemos implementar un juego que nos permita medir nuestros reflejos.
 - Agregar dificultades (blanco más chico).
 - El blanco debe desaparecer después de N segundos.
 
-Podés clonarlo o usarlo directamentes desde [CodeSandbox](https://codesandbox.io/s/github/goncy/interview-challenges/tree/main/proyectos-take-home/juego-de-reflejos):
+Podés clonarlo o usarlo directamentes desde [CodeSandbox](https://code sandbox.io/s/github/goncy/interview-challenges/tree/main/proyectos-take-home/juego-de-reflejos):
