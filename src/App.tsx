@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [playing, setPlaying] = useState(false);
@@ -34,6 +34,14 @@ function App() {
     setTime(0);
   };
 
+  useEffect(() => {
+    if (push) {
+      setTimeout(() => {
+        crono(false);
+      }, 10010);
+    }
+  }, [push]);
+
   return (
     <main className="flex flex-col justify-around items-center">
       <header>
@@ -49,18 +57,22 @@ function App() {
       </section>
 
       <footer>
-        {playing && push && <button
-          className=" w-[300px] text-[30px] hover:bg-slate-50 hover:text-black duration-300"
-          onClick={stopGame}
-        >
-          Reiniciar
-        </button>}
-        {!playing && <button
-          className=" w-[300px] text-[30px] hover:bg-slate-50 hover:text-black duration-300"
-          onClick={play}
-        >
-          Jugar
-        </button>}
+        {playing && push && (
+          <button
+            className=" w-[300px] text-[30px] hover:bg-slate-50 hover:text-black duration-300"
+            onClick={stopGame}
+          >
+            Reiniciar
+          </button>
+        )}
+        {!playing && (
+          <button
+            className=" w-[300px] text-[30px] hover:bg-slate-50 hover:text-black duration-300"
+            onClick={play}
+          >
+            Jugar
+          </button>
+        )}
       </footer>
     </main>
   );
