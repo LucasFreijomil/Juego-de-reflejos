@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [playing, setPlaying] = useState(false);
   const [push, setPush] = useState(false);
   const [time, setTime] = useState(0);
   const [timeId, setTimeId] = useState(0);
+  const [showRestart, setShowRestart] = useState(false);
 
   const crono = (flag: boolean) => {
     if (flag) {
@@ -34,6 +35,15 @@ function App() {
     setTime(0);
   };
 
+  useEffect(() => {
+    if (push) {
+      setTimeout(() => {
+        crono(false);
+        setShowRestart(true);
+      }, 10010);
+    }
+  }, [push]);
+
   return (
     <main className="flex flex-col justify-around items-center">
       <header>
@@ -41,7 +51,10 @@ function App() {
       </header>
       <section>
         <figure
-          onClick={() => crono(false)}
+          onClick={() => {
+            crono(false);
+            setShowRestart(true);
+          }}
           className={
             push ? "size-[300px] bg-red-800" : "size-[300px] bg-slate-400"
           }
@@ -49,18 +62,25 @@ function App() {
       </section>
 
       <footer>
-        {playing && push && <button
-          className=" w-[300px] text-[30px] hover:bg-slate-50 hover:text-black duration-300"
-          onClick={stopGame}
-        >
-          Reiniciar
-        </button>}
-        {!playing && <button
-          className=" w-[300px] text-[30px] hover:bg-slate-50 hover:text-black duration-300"
-          onClick={play}
-        >
-          Jugar
-        </button>}
+        {playing && push && showRestart && (
+          <button
+            className=" w-[300px] text-[30px] hover:bg-slate-50 hover:text-black duration-300"
+            onClick={() => {
+              stopGame();
+              setShowRestart(false);
+            }}
+          >
+            Reiniciar
+          </button>
+        )}
+        {!playing && (
+          <button
+            className=" w-[300px] text-[30px] hover:bg-slate-50 hover:text-black duration-300"
+            onClick={play}
+          >
+            Jugar
+          </button>
+        )}
       </footer>
     </main>
   );
